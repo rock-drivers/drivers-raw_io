@@ -1,4 +1,3 @@
 rock_library(raw_io
-    SOURCES raw_io.cpp
-    HEADERS raw_io.hpp
-    DEPS_PKGCONFIG base-types )
+    HEADERS Digital.hpp Analog.hpp
+    DEPS_PKGCONFIG base-types)
