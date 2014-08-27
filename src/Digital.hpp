@@ -8,7 +8,7 @@ namespace raw_io
     struct Digital
     {
         base::Time time;
-        float data;
+        bool data;
     };
 
 } // end namespace raw_io
