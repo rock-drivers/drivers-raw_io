@@ -9,6 +9,13 @@ namespace raw_io
     {
         base::Time time;
         bool data;
+
+        Digital(){}
+        
+        Digital(base::Time const& time, bool data):
+            time(time),
+            data(data)
+        {}
     };
 
 } // end namespace raw_io

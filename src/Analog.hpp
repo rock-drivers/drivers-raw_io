@@ -9,6 +9,13 @@ namespace raw_io
     {
         base::Time time;
         float data;
+
+        Analog(){}
+
+        Analog(base::Time const& time, float data):
+            time(time),
+            data(data)
+        {}
     };
 
 } // end namespace raw_io
