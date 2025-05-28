@@ -8,10 +8,10 @@ namespace raw_io
     struct Digital
     {
         base::Time time;
-        bool data;
+        bool data = false;
 
         Digital(){}
-        
+
         Digital(base::Time const& time, bool data):
             time(time),
             data(data)
