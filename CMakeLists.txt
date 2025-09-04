@@ -1,7 +1,7 @@
-# CMakeLists.txt has to be located in the project folder and cmake has to be
-# executed from 'project/build' with 'cmake ../'.
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.10)
+project(raw_io VERSION 0.1)
 find_package(Rock)
-set(CMAKE_CXX_STANDARD 11)
-rock_init(raw_io 0.1)
+rock_init()
+
+set(CMAKE_CXX_STANDARD 14)
 rock_standard_layout()

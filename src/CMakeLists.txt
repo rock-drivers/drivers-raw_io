@@ -1,3 +1,7 @@
 rock_library(raw_io
-    HEADERS Digital.hpp Analog.hpp PWMDutyDurations.hpp
+    SOURCES
+        PWMServo.cpp
+    HEADERS
+        Digital.hpp Analog.hpp PWMDutyDurations.hpp PWMServoConfiguration.hpp
+        PWMServo.hpp
     DEPS_PKGCONFIG base-types)
