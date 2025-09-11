@@ -33,20 +33,6 @@ namespace raw_io {
          * will not generate any response from the servo
          */
         std::uint32_t pwm_deadband_width = 0;
-
-        /** Timeout after which the task will generate the zero command
-         *
-         * This is disabled if timeout is zero.
-         */
-        base::Time timeout = base::Time::fromMilliseconds(100);
-
-        /** Value output when reaching the timeout
-         *
-         * Servos usually disable themselves for invalid PWMs, so it is zero
-         * by default. You may want to disable the timeout feature altogether if
-         * there are no "good" timeout command
-         */
-        std::uint32_t pwm_timeout = 0;
     };
 }
 
