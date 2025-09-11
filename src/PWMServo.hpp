@@ -17,6 +17,7 @@ namespace raw_io {
         PWMServo(PWMServoConfiguration const& conf);
 
         uint32_t toPWM(base::Angle const& angle) const;
+        base::Angle fromPWM(uint32_t duty_duration) const;
 
         base::Angle getCenterAngle() const;
 

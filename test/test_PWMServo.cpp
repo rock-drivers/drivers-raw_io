@@ -47,12 +47,14 @@ TEST_F(PWMServoTest, it_converts_values_just_before_the_deadband)
     ASSERT_EQ(283, servo.toPWM(Angle::fromRad(-0.4) - Angle::fromDeg(1.00001)));
 }
 
-TEST_F(PWMServoTest, it_returns_the_center_if_the_angle_is_nearer_than_the_threshold_negative)
+TEST_F(PWMServoTest,
+    it_returns_the_center_if_the_angle_is_nearer_than_the_threshold_negative)
 {
     ASSERT_EQ(325, servo.toPWM(Angle::fromRad(-0.4) - Angle::fromDeg(0.99999)));
 }
 
-TEST_F(PWMServoTest, it_returns_the_center_if_the_angle_is_nearer_than_the_threshold_positive)
+TEST_F(PWMServoTest,
+    it_returns_the_center_if_the_angle_is_nearer_than_the_threshold_positive)
 {
     ASSERT_EQ(325, servo.toPWM(Angle::fromRad(-0.4) + Angle::fromDeg(0.99999)));
 }
@@ -66,4 +68,29 @@ TEST_F(PWMServoTest, it_converts_values_just_after_the_deadband)
 TEST_F(PWMServoTest, it_converts_values_above_the_deadband)
 {
     ASSERT_EQ(450, servo.toPWM(Angle::fromRad(-0.3)));
+}
+
+TEST_F(PWMServoTest, fromPWM_returns_unknown_angle_if_the_pwm_value_is_below_minimum)
+{
+    ASSERT_TRUE(base::isUnknown(servo.fromPWM(100)));
+}
+
+TEST_F(PWMServoTest, fromPWM_returns_unknown_angle_if_the_pwm_value_is_above_maximum)
+{
+    ASSERT_TRUE(base::isUnknown(servo.fromPWM(700)));
+}
+
+TEST_F(PWMServoTest, fromPWM_converts_an_angle_below_the_deadband)
+{
+    ASSERT_NEAR(-0.45, servo.fromPWM(250).getRad(), 1e-3);
+}
+
+TEST_F(PWMServoTest, fromPWM_converts_an_angle_within_the_deadband)
+{
+    ASSERT_NEAR(-0.4, servo.fromPWM(322).getRad(), 1e-3);
+}
+
+TEST_F(PWMServoTest, fromPWM_converts_an_angle_above_the_deadband)
+{
+    ASSERT_NEAR(-0.3, servo.fromPWM(450).getRad(), 1e-3);
 }

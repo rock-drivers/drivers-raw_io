@@ -1,5 +1,6 @@
 #include <raw_io/PWMServo.hpp>
 
+using namespace base;
 using namespace raw_io;
 using namespace std;
 
@@ -41,7 +42,27 @@ uint32_t PWMServo::toPWM(base::Angle const& angle) const
     return std::round(pwm);
 }
 
-base::Angle PWMServo::clampAngleToValidRange(base::Angle const& angle) const {
+base::Angle PWMServo::fromPWM(uint32_t duration) const
+{
+    if (duration < m_configuration.pwm_min || duration > m_configuration.pwm_max) {
+        return base::Angle();
+    }
+    int diff_to_deadband = duration - m_pwm_deadband_start;
+    if (diff_to_deadband < 0) {
+        return Angle::fromRad(diff_to_deadband / m_pwm_per_rad) + m_angle_center;
+    }
+    else if (diff_to_deadband < static_cast<int>(m_configuration.pwm_deadband_width)) {
+        return m_angle_center;
+    }
+    else {
+        return Angle::fromRad((diff_to_deadband - m_configuration.pwm_deadband_width) /
+                              m_pwm_per_rad) +
+               m_angle_center;
+    }
+}
+
+base::Angle PWMServo::clampAngleToValidRange(base::Angle const& angle) const
+{
     if (angle < m_configuration.angle_min) {
         return m_configuration.angle_min;
     }
